@@ -6,7 +6,15 @@ const swaggerJSDoc = require('swagger-jsdoc')
 const swaggerUI = require('swagger-ui-express')
 const cors = require('cors');
 const PORT = process.env.PORT || 8080; // Need this for Heroku
-let jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken')
+
+
+const contact = require('./routes/contact')
+const deals = require('./routes/deals')
+const restaurant = require('./routes/restaurant')
+const search = require('./routes/search')
+const user = require('./routes/user')
+
 
 const app = express()
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -14,6 +22,15 @@ app.use(bodyParser.json())
 app.options('*', cors());
 app.use(cors());
 app.use(express.json());
+
+const version = '/api/v1'
+
+
+app.use(version + '/contact', contact)
+app.use(version + '/deals', deals)
+app.use(version + '/restaurant', restaurant)
+app.use(version + '/search', search)
+app.use(version + '/user', user)
 
 
 const options = {
@@ -43,7 +60,7 @@ const options = {
             }
         ],
     },
-    apis: ["./routes/menu.js", "./routes/restaurant.js", "./routes/user.js"],
+    apis: ["./routes/restaurant.js", "./routes/user.js", "./routes/deals.js", "./routes/contact.js", "./routes/search.js"],
 
 };
 const config = swaggerJSDoc(options)

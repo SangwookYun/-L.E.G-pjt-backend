@@ -1,0 +1,33 @@
+{
+  "name": "leg-pjt-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.6.3",
+    "mongoose": "^5.11.10",
+    "mongoose-unique-validator": "^2.0.3",
+    "nodemon": "^2.0.6",
+    "swagger": "^0.7.5",
+    "swagger-jsdoc": "^6.0.0",
+    "swagger-ui-express": "^4.1.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jasonwei0224/-L.E.G-pjt-backend.git"
+  },
+  "author": "Jason and Yun",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jasonwei0224/-L.E.G-pjt-backend/issues"
+  },
+  "homepage": "https://github.com/jasonwei0224/-L.E.G-pjt-backend#readme"
+}
