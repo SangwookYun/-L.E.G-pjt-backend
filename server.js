@@ -8,7 +8,7 @@ const cors = require('cors');
 const PORT = process.env.PORT || 8080; // Need this for Heroku
 const jwt = require('jsonwebtoken')
 
-const categories = require('./routes/categories')
+
 const contact = require('./routes/contact')
 const deals = require('./routes/deals')
 const restaurant = require('./routes/restaurant')
@@ -25,7 +25,7 @@ app.use(express.json());
 
 const version = '/api/v1'
 
-app.use(version + '/categories', categories)
+
 app.use(version + '/contact', contact)
 app.use(version + '/deals', deals)
 app.use(version + '/restaurant', restaurant)
@@ -60,7 +60,7 @@ const options = {
             }
         ],
     },
-    apis: ["./routes/menu.js", "./routes/restaurant.js", "./routes/user.js"],
+    apis: ["./routes/restaurant.js", "./routes/user.js", "./routes/deals.js", "./routes/contact.js", "./routes/search.js"],
 
 };
 const config = swaggerJSDoc(options)

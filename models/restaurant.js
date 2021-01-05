@@ -22,7 +22,7 @@ const uniqueValidator = require('mongoose-unique-validator');
  *
  *
  */
-const dbRestaurantShema = new Schema({
+const dbRestaurantSchema = new Schema({
     _id: {
         type: String,
     },
@@ -91,5 +91,5 @@ const dbRestaurantShema = new Schema({
         }
     },
 })
-dbRestaurantShema.plugin(uniqueValidator);
-module.exports = mongoose.model('DBRestaurant', dbRestaurantShema);
+dbRestaurantSchema.plugin(uniqueValidator);
+module.exports = mongoose.model('DBRestaurant', dbRestaurantSchema);
