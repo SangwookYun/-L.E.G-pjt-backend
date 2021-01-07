@@ -36,7 +36,7 @@ const router = express.Router();
  *     security:
  *       - Secured: []
  */
-router.post('/search/', function(req, res, next) {
+router.post('/', function(req, res, next) {
     res.status(200).json({ message: "success post to search" });
 })
 
