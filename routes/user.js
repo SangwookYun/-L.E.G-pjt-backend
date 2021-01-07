@@ -2,41 +2,17 @@ const express = require('express');
 const router = express.Router();
 
 
-
-/**
- * @swagger
- * /user/:email:
- *   GET:
- *     tags:
- *       - User
- *     description: Get user profile
- *     consumes:
- *       - application/json
- *     produces:
- *       - application/json
- *     parameters:
- *       - name: id
- *         in: query
- *         require: true
- *         type: string
- *         example: 1
- *     responses:
- *       200:
- *          description: OK
- *          content:
- *             application/json:
- *              example:
- *                  [
- *                   {
- *                      message: Success
- *                   }
- *               ]
- *       400:
- *          description: Fail to add 
- *       default:
- *         description: Fail to add
- *     security:
- *       - Secured: []
- */
+router.get('/user/:email', function(req, res, next) {
+    res.status(200).json({ message: "success get user email" });
+})
+router.post('/user/:email', function(req, res, next) {
+    res.status(200).json({ message: "success post user info" });
+})
+router.patch('/user/:email', function(req, res, next) {
+    res.status(200).json({ message: "success update user info" });
+})
+router.delete('/user/:email', function(req, res, next) {
+    res.status(200).json({ message: "success delete user info" });
+})
 
 module.exports = router;

@@ -50,7 +50,7 @@ const options = {
             },
         },
         servers: [{
-                url: "http://localhost:3000/api/v1/",
+                url: "http://localhost:8080/api/v1/",
                 description: "Development"
 
             },
@@ -60,12 +60,12 @@ const options = {
             }
         ],
     },
-    apis: ["./routes/restaurant.js", "./routes/user.js", "./routes/deals.js", "./routes/contact.js", "./routes/search.js"],
+    apis: ["./routes/*.js"],
 
 };
 const config = swaggerJSDoc(options)
 app.use(
-    "/docs",
+    "/docs1",
     swaggerUI.serve,
     swaggerUI.setup(config)
 )
