@@ -4,17 +4,17 @@ const router = express.Router();
 
 
 
-// router.get('/restaurant/:category', function() {
+router.get('/restaurant/:category', function(req, res, next) {
 
-// })
-// router.get('/restaurant/:restaurantid', function() {
+})
+router.get('/restaurant/:restaurantid', function(req, res, next) {
 
-// })
-// router.patch('/restaurant/:restaurantid', function() {
+})
+router.patch('/restaurant/:restaurantid', function(req, res, next) {
 
-// })
-// router.delete('/restaurant/:restaurant', function() {
+})
+router.delete('/restaurant/:restaurant', function(req, res, next) {
 
-// })
+})
 
 module.exports = router;

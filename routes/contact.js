@@ -36,8 +36,8 @@ const router = express.Router();
  *     security:
  *       - Secured: []
  */
-router.post('/contact/', function() {
-
+router.post('/contact/', function(req, res, next) {
+    res.status(200).json({ message: "success post to contact" });
 })
 
 module.exports = router;
