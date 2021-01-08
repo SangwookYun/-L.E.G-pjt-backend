@@ -7,13 +7,15 @@ const swaggerUI = require('swagger-ui-express')
 const cors = require('cors');
 const PORT = process.env.PORT || 8080; // Need this for Heroku
 const jwt = require('jsonwebtoken')
-
+const dotenv = require('dotenv');
+dotenv.config();
 
 const contact = require('./routes/contact')
 const deals = require('./routes/deals')
 const restaurant = require('./routes/restaurant')
 const search = require('./routes/search')
-const user = require('./routes/user')
+const user = require('./routes/user');
+const mongoose = require('mongoose');
 
 
 const app = express()
@@ -23,9 +25,19 @@ app.options('*', cors());
 app.use(cors());
 app.use(express.json());
 
+const USERNAME = process.env.DBUSERNAME
+const DBPASSWORD = process.env.DBPASSWORD
+const DBNAME = process.env.DBNAME
+
+const uri = `mongodb+srv://${USERNAME}:${DBPASSWORD}@cluster0.l8dbx.mongodb.net/${DBNAME}?retryWrites=true&w=majority`;
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true },
+    (err) => {
+        if (err) throw err;
+        console.log('Successfully connected');
+    })
+
+
 const version = '/api/v1'
-
-
 app.use(version + '/contact', contact)
 app.use(version + '/deals', deals)
 app.use(version + '/restaurant', restaurant)
@@ -55,7 +67,7 @@ const options = {
 
             },
             {
-                url: "https://api-jasonandyun.herokuapp.com/api/v1/",
+                url: "https://leg-backend.herokuapp.com/api/v1/",
                 description: "live"
             }
         ],
@@ -65,7 +77,7 @@ const options = {
 };
 const config = swaggerJSDoc(options)
 app.use(
-    "/docs1",
+    "/docs",
     swaggerUI.serve,
     swaggerUI.setup(config)
 )

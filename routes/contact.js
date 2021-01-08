@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const { json } = require('body-parser');
 /**
  * @swagger
  * /contact/:
@@ -13,11 +13,16 @@ const router = express.Router();
  *     produces:
  *       - application/json
  *     parameters:
- *       - name: term
- *         in: query
+ *       - name: email
+ *         in: body
  *         require: true
  *         type: string
- *         example: 1
+ *         example: "test@mail.com"
+ *       - name: message
+ *         in: body
+ *         require: true
+ *         type: string
+ *         example: "Hi this is the message from contact form"
  *     responses:
  *       200:
  *          description: OK
@@ -26,18 +31,19 @@ const router = express.Router();
  *              example:
  *                  [
  *                   {
- *                      message: Success
+ *                      message: Successful post to contact
  *                   }
  *               ]
  *       400:
- *          description: Fail to add 
+ *          description: Unauthorized
  *       default:
- *         description: Fail to add
+ *         description: Fail to process contact form 
  *     security:
  *       - Secured: []
  */
 router.post('/', function(req, res, next) {
-    res.status(200).json({ message: "success post to contact" });
+
+    res.status(200).json({ body: req.body, message: "success post to contact" });
 })
 
 module.exports = router;
