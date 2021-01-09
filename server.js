@@ -30,7 +30,7 @@ const DBPASSWORD = process.env.DBPASSWORD
 const DBNAME = process.env.DBNAME
 
 const uri = `mongodb+srv://${USERNAME}:${DBPASSWORD}@cluster0.l8dbx.mongodb.net/${DBNAME}?retryWrites=true&w=majority`;
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true },
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },
     (err) => {
         if (err) throw err;
         console.log('Successfully connected');
