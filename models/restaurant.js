@@ -23,9 +23,9 @@ const uniqueValidator = require('mongoose-unique-validator');
  *
  */
 const dbRestaurantSchema = new Schema({
-    _id: {
-        type: String,
-    },
+    // _id: {
+    //     type: String,
+    // },
     name: {
         type: String,
         required: true,
@@ -71,25 +71,25 @@ const dbRestaurantSchema = new Schema({
             required: false,
         },
     },
-    hours: {
-        type: Array,
-        required: false,
-    },
-    hour: {
-        type: Object,
-        day: {
-            type: String,
-        },
-        from: {
-            type: String,
-        },
-        to: {
-            type: String,
-        },
-        closed: {
-            type: Boolean,
-        }
-    },
+    //     hours: {
+    //         type: Array,
+    //         required: false,
+    //     },
+    //     hour: {
+    //         type: Object,
+    //         day: {
+    //             type: String,
+    //         },
+    //         from: {
+    //             type: String,
+    //         },
+    //         to: {
+    //             type: String,
+    //         },
+    //         closed: {
+    //             type: Boolean,
+    //         }
+    //     },
 })
 dbRestaurantSchema.plugin(uniqueValidator);
 module.exports = mongoose.model('DBRestaurant', dbRestaurantSchema);

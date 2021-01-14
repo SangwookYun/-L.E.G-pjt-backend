@@ -22,9 +22,9 @@ const { ObjectID } = require('mongodb');
  *
  */
 const dbMenuShema = new Schema({
-    _id: {
-        type: String,
-    },
+    // _id: {
+    //     type: String,
+    // },
 
     dateCreated: {
         type: Date,
