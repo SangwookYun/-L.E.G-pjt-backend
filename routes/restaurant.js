@@ -10,12 +10,19 @@ const restaurantModel = require('../models/restaurant')
 
 // })
 router.get('/:restaurantid', function(req, res, next) {
-    // console.log(req.params.restaurantid)
+    console.log(req.params.restaurantid)
     restaurantModel.aggregate([{
-            $match: { cuisine: "Canadian" }
+            $match: { newid: req.params.restaurantid}
         }, {
             $project: {
-                name: 1
+                _id: 1,
+                newid:1,
+                name: 1, 
+                phone: 1,
+                address: 1,
+                cuisine: 1,
+                email: 1,
+                website:1
             }
         }],
         (err, result) => {
@@ -29,6 +36,19 @@ router.get('/:restaurantid', function(req, res, next) {
         })
 })
 
+router.get('/', function(req, res, next) {
+    console.log(req.params.restaurantid)
+    restaurantModel.find({isBusiness: true},
+        (err, result) => {
+            console.log(err)
+            if (err) {
+                res.status(500).json({ message: "unable to retrieve data" });
+            }
+
+            console.log(result)
+            res.status(200).json({ message: "success get restaurant", data: result });
+        })
+})
 // router.patch('/:restaurantid', function(req, res, next) {
 
 // })
