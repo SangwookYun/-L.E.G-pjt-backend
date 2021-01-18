@@ -30,6 +30,18 @@ const dbRestaurantSchema = new Schema({
         type: String,
         required: true,
     },
+    newid: {
+        type: String,
+        required: true,
+    },
+    isBusiness: {
+        type: Boolean,
+        required: true,
+    },
+    mainTitle: {
+        type: String,
+        required: true,
+    },
     cuisine: {
         type: String,
         required: true,
