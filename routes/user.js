@@ -2,6 +2,8 @@ const { request } = require('express');
 const express = require('express');
 const router = express.Router();
 const userModel = require('../models/user')
+const auth = require('firebase-admin');
+const admin = require('../firebaseSetUp');
 
 /**
  * @swagger
@@ -115,108 +117,29 @@ router.get('/:email', function(req, res, next) {
  *       - Secured: []
  */
 router.delete('/:email', function(req, res, next) {
-    userModel.deleteOne({ email: req.params.email }).then((result) => {
-        if (result.deleteCount < 1) {
-            res.status(500).json({ message: "Fail to delete" });
-        } else {
-            res.status(200).json({ message: "success delete user info" });
-        }
-    })
+    admin.auth().getUserByEmail(req.params.email)
+        .then((userRecord) => {
+            admin.auth().deleteUser(userRecord.uid).then(() => {
+                try {
+                    userModel.deleteOne({ email: req.params.email }).then((result) => {
+                        if (result.deleteCount < 1) {
+                            res.status(500).json({ message: "Fail to delete" });
+                        } else {
+                            res.status(200).json({ message: "success delete user info" });
+                        }
+                    })
+                } catch (e) {
+                    res.status(500).json({ message: "fail to delete user from db", error: e.message });
+                };
+            }).catch((e) => {
+                res.status(500).json({ message: "fail to delet user from firebase", error: e.message })
+            });
+        }).catch((e) => {
+            res.status(401).json({ message: "canno find user by that email ", error: e.message })
+        })
+
 })
 
-/**
- * @swagger
- * /user/:
- *   post:
- *     tags:
- *       - User
- *     description: Add New User
- *     consumes:
- *       - application/json
- *     produces:
- *       - application/json
- *     parameters:
- *       - name: email
- *         in: body
- *         require: true
- *         type: string
- *         example: test@mail.com
- *       - name: firstName
- *         in: body
- *         require: true
- *         type: string
- *         example: Yun
- *       - name: lastName
- *         in: body
- *         require: true
- *         type: string
- *         example: Sangwook
- *       - name: userType
- *         in: body
- *         require: true
- *         type: string
- *         example: Admin
- *       - name: address
- *         in: body
- *         require: true
- *         type: string
- *         example: 1234 244 st
- *       - name: city
- *         in: body
- *         require: true
- *         type: string
- *         example: Vancouver
- *       - name: province
- *         in: body
- *         require: true
- *         type: string
- *         example: BC
- *     responses:
- *       201:
- *          description: success post user info
- *          content:
- *             application/json:
- *              example:
- *                  [
- *                   {
- *                      message: success post user info",
- *                      data: [{
- *                                  "restaurantOwned": [],
- *                                  "_id": "5asdfasdfoipje",
- *                                  "email": "test@gmail.com",
- *                                  "firstName": "J",
- *                                  "lastName": "Adam",
- *                                  "userType": "Admin",
- *                                  "address": "123456 211",
- *                                  "city": "Vancouver",
- *                                   "__v": 0
- *                      }]
- *                   }
- *               ]
- *       400:
- *          description: Unauthorized 
- *       default:
- *         description: fail to create use
- *     security:
- *       - Secured: []
- */
-router.post('/', function(req, res, next) {
-
-    userModel.create({
-        email: req.body.email,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        userType: req.body.userType,
-        address: req.body.address,
-        city: req.body.city,
-        provice: req.body.province,
-    }).then((result) => {
-        res.status(201).json({ message: "success post user info", data: result });
-    }).catch((e) => {
-        console.log(e)
-        res.status(500).json({ message: "fail to create user", error: e.errors });
-    })
-})
 
 /**
  * @swagger
@@ -296,20 +219,26 @@ router.post('/', function(req, res, next) {
  */
 router.patch('/', function(req, res, next) {
     // console.log(req.body)
-    userModel.findOneAndUpdate({ _id: req.body.userid }, {
-        email: req.body.email,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        userType: req.body.userType,
-        address: req.body.address,
-        city: req.body.city,
-        provice: req.body.city,
-    }).then((result) => {
-        // console.log(result)
-        res.status(200).json({ message: "success update user info", data: result });
+    admin.auth().updateUser(req.body.userid, {
+        email: req.body.email
+    }).then(() => {
+        userModel.findOneAndUpdate({ _id: req.body.userid }, {
+            email: req.body.email,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            userType: req.body.userType,
+            address: req.body.address,
+            city: req.body.city,
+            provice: req.body.city,
+        }).then((result) => {
+            // console.log(result)
+            res.status(200).json({ message: "success update user info", data: result });
 
+        }).catch((e) => {
+            res.status(500).json({ message: "fail to update user", error: e.message });
+        })
     }).catch((e) => {
-        res.status(500).json({ message: "fail to update user", error: err.errors });
+        res.status(500).json({ message: "failed to update user", error: e.message });
     })
 
 })

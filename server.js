@@ -15,7 +15,8 @@ const deals = require('./routes/deals')
 const restaurant = require('./routes/restaurant')
 const search = require('./routes/search')
 const user = require('./routes/user');
-const menu = require('./routes/menu')
+const menu = require('./routes/menu');
+const auth = require('./routes/auth');
 const mongoose = require('mongoose');
 
 
@@ -39,6 +40,7 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true, useFind
 
 
 const version = '/api/v1'
+app.use(version + '/auth', auth)
 app.use(version + '/contact', contact)
 app.use(version + '/deals', deals)
 app.use(version + '/restaurant', restaurant)

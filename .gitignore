@@ -10,6 +10,7 @@
 *.userosscache
 *.sln.docstates
 *.env
+# legbackend-firebase-adminsdk-nkepd-242f3e430b.json
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
