@@ -61,6 +61,10 @@ const dbRestaurantSchema = new Schema({
         type: String,
         required: false,
     },
+    mainPicture: {
+        type: String,
+        required: false,
+    },
     address: {
         street: {
             type: String,

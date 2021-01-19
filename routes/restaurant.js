@@ -22,7 +22,9 @@ router.get('/:restaurantid', function(req, res, next) {
                 address: 1,
                 cuisine: 1,
                 email: 1,
-                website:1
+                website:1,
+                mainPicture:1,
+                pictures:1
             }
         }],
         (err, result) => {
