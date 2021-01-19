@@ -23,9 +23,9 @@ const uniqueValidator = require('mongoose-unique-validator');
  *
  */
 const dbUserShema = new Schema({
-    // _id: {
-    //     type: String,
-    // },
+    _id: {
+        type: String,
+    },
     email: {
         type: String,
         lowercase: true,
@@ -43,7 +43,7 @@ const dbUserShema = new Schema({
     },
     userType: {
         type: String,
-        required: true,
+        required: false,
     },
     address: {
         type: String,
