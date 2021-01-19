@@ -8,6 +8,7 @@ var app = admin.initializeApp({
         "private_key": process.env.private_key.replace(/\\n/g, '\n'),
         "client_email": process.env.client_email,
         "project_id": process.env.project_id,
+        "storageBucket": "legbackend.appspot.com"
     }),
     databaseURL: "https://legbackend-default-rtdb.firebaseio.com"
 })
