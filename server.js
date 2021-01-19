@@ -18,7 +18,7 @@ const user = require('./routes/user');
 const menu = require('./routes/menu');
 const auth = require('./routes/auth');
 const mongoose = require('mongoose');
-
+const admin = require('./firebaseinit')
 
 const app = express()
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -47,6 +47,7 @@ app.use(version + '/restaurant', restaurant)
 app.use(version + '/search', search)
 app.use(version + '/user', user)
 app.use(version + '/menu', menu)
+
 
 
 const options = {
