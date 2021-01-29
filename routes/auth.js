@@ -107,10 +107,11 @@ router.post("/register", function(req, res, next) {
     let uid = "";
     admin.auth().createUser({
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        emailVerified: true,
     }).then((userRecord) => {
         uid = userRecord.uid;
-        console.log('New uesr created');
+
         try {
             userModel.create({
                 _id: uid,
@@ -127,6 +128,7 @@ router.post("/register", function(req, res, next) {
                 city: "",
                 province: "",
             }).then((result) => {
+                console.log('New uesr created');
                 res.status(201).json({ message: "success create user", data: result });
             }).catch((e) => {
                 // console.log(e)
