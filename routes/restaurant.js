@@ -24,7 +24,9 @@ router.get('/:restaurantid', function(req, res, next) {
                 email: 1,
                 website:1,
                 mainPicture:1,
-                pictures:1
+                pictures:1,
+                lng:1,
+                lat:1
             }
         }],
         (err, result) => {
