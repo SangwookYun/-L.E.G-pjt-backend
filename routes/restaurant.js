@@ -26,7 +26,8 @@ router.get('/:restaurantid', function(req, res, next) {
                 mainPicture:1,
                 pictures:1,
                 lng:1,
-                lat:1
+                lat:1, 
+                coupon : 1
             }
         }],
         (err, result) => {

@@ -43,7 +43,7 @@ const dbRestaurantSchema = new Schema({
         required: true,
     },
     cuisine: {
-        type: String,
+        type: Array,
         required: true,
     },
     email: {
@@ -54,7 +54,7 @@ const dbRestaurantSchema = new Schema({
         max: 255,
     },
     phone: {
-        type: Number,
+        type: String,
         required: true,
     },
     website: {
@@ -87,6 +87,10 @@ const dbRestaurantSchema = new Schema({
             required: false,
         },
     },
+    coupons : {
+        type: Array,
+        required : true
+    }
     //     hours: {
     //         type: Array,
     //         required: false,
@@ -108,4 +112,4 @@ const dbRestaurantSchema = new Schema({
     //     },
 })
 dbRestaurantSchema.plugin(uniqueValidator);
-module.exports = mongoose.model('DBRestaurant', dbRestaurantSchema);
+module.exports = mongoose.model('DBrestaurant', dbRestaurantSchema);
