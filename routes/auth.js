@@ -105,6 +105,7 @@ router.post("/register", function(req, res, next) {
         res.status(400).json({ message: "Missing credentials" });
     }
     let uid = "";
+    console.log(req.body)
     admin.auth().createUser({
         email: req.body.email,
         password: req.body.password,
@@ -133,22 +134,48 @@ router.post("/register", function(req, res, next) {
             }).catch((e) => {
                 // console.log(e)
                 admin.auth().deleteUser(uid)
-                res.status(500).json({ message: "Failed to create user", error: e.message });
+                res.status(500).json({ message: "Failed to create user1", error: e.message });
             })
         } catch (e) {
             // console.log(e)
             admin.auth().deleteUser(uid)
-            res.status(401).json({ message: "Failed to create user", error: e.message });
+            res.status(401).json({ message: "Failed to create user2", error: e.message });
         }
     }).catch((e) => {
         // console.log(e)
-        res.status(401).json({ message: "Failed to create user", error: e.message });
+        res.status(401).json({ message: "Failed to create user3", error: e.message });
     })
 
 
 });
 
 // sign in user 
+
+router.post("/login", function(req, res, next) {
+
+    const {
+        email,
+        password
+    } = req.body
+
+    if (!email || !password) {
+        res.status(400).json({ message: "Missing credentials" });
+    }
+    let uid = "";
+    console.log(req.body)
+    userModel.find({email: req.body.email},
+        (err, result) => {
+            console.log(err)
+            if (err) {
+                res.status(500).json({ message: "unable to retrieve data" });
+            }
+
+            console.log(result)
+            res.status(200).json({ message: "success get user", data: result });
+        })
+
+
+});
 
 
 
