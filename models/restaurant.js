@@ -66,50 +66,14 @@ const dbRestaurantSchema = new Schema({
         required: false,
     },
     address: {
-        street: {
-            type: String,
-            required: false,
-        },
-        city: {
-            type: String,
-            required: false,
-        },
-        province: {
-            type: String,
-            required: false,
-        },
-        postalCode: {
-            type: String,
-            required: false,
-        },
-        coordinate: {
-            type: [Number, Number],
-            required: false,
-        },
+        type: String,
+        required: false,
     },
     coupons : {
         type: Array,
         required : true
     }
-    //     hours: {
-    //         type: Array,
-    //         required: false,
-    //     },
-    //     hour: {
-    //         type: Object,
-    //         day: {
-    //             type: String,
-    //         },
-    //         from: {
-    //             type: String,
-    //         },
-    //         to: {
-    //             type: String,
-    //         },
-    //         closed: {
-    //             type: Boolean,
-    //         }
-    //     },
+    
 })
 dbRestaurantSchema.plugin(uniqueValidator);
 module.exports = mongoose.model('DBrestaurant', dbRestaurantSchema);
