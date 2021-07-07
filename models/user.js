@@ -23,44 +23,30 @@ const uniqueValidator = require('mongoose-unique-validator');
  *
  */
 const dbUserShema = new Schema({
-    _id: {
-        type: String,
-    },
     email: {
         type: String,
-        lowercase: true,
-        unique: true,
         required: true,
-        max: 255,
     },
-    firstName: {
+    name: {
         type: String,
         required: true,
     },
-    lastName: {
+    password: {
         type: String,
         required: true,
     },
-    userType: {
+    status: {
         type: String,
-        required: false,
-    },
-    address: {
-        type: String,
-        required: false,
-    },
-    city: {
-        type: String,
-        required: false,
-    },
-    province: {
-        type: String,
-        required: false,
-    },
-    restaurantOwned: {
-        type: [ObjectID],
-        required: false
-    },
+        default : "I am a new user!"
+    }, 
+    couponlimit: {
+        type: Number,
+        default : 3
+    }, 
+    coupons: [ {
+        type:Schema.Types.ObjectId,
+        ref:'DBCoupon'
+    }]
     // TODO: Need maybe user's credit card info
 
 })
