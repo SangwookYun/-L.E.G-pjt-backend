@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const connDB = async () => {
   try {
@@ -14,4 +14,4 @@ const connDB = async () => {
   }
 };
 
-module.exports = connDB;
+export default connDB;

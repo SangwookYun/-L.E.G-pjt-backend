@@ -1,9 +1,5 @@
-const mongoose = require("mongoose");
-
-const { Schema } = mongoose;
-const { ObjectID } = require("mongodb");
-
-const uniqueValidator = require("mongoose-unique-validator");
+import mongoose from "mongoose";
+import uniqueValidator from "mongoose-unique-validator";
 
 /**
  * @swagger
@@ -22,7 +18,7 @@ const uniqueValidator = require("mongoose-unique-validator");
  *
  *
  */
-const dbUserShema = new Schema(
+const dbUserShema = mongoose.Schema(
   {
     email: {
       type: String,
@@ -47,7 +43,7 @@ const dbUserShema = new Schema(
     },
     coupons: [
       {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "DBCoupon",
       },
     ],
@@ -58,4 +54,6 @@ const dbUserShema = new Schema(
   }
 );
 dbUserShema.plugin(uniqueValidator);
-module.exports = mongoose.model("DBUser", dbUserShema);
+const User = mongoose.model("DBUser", dbUserShema);
+
+export default User;
