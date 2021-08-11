@@ -22,35 +22,40 @@ const uniqueValidator = require("mongoose-unique-validator");
  *
  *
  */
-const dbUserShema = new Schema({
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  name: {
-    type: String,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-  status: {
-    type: String,
-    default: "I am a new user!",
-  },
-  couponlimit: {
-    type: Number,
-    default: 3,
-  },
-  coupons: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "DBCoupon",
+const dbUserShema = new Schema(
+  {
+    email: {
+      type: String,
+      required: true,
+      unique: true,
     },
-  ],
-  // TODO: Need maybe user's credit card info
-});
+    name: {
+      type: String,
+      required: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+    status: {
+      type: String,
+      default: "I am a new user!",
+    },
+    couponlimit: {
+      type: Number,
+      default: 3,
+    },
+    coupons: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "DBCoupon",
+      },
+    ],
+    // TODO: Need maybe user's credit card info
+  },
+  {
+    timestamps: true,
+  }
+);
 dbUserShema.plugin(uniqueValidator);
 module.exports = mongoose.model("DBUser", dbUserShema);
