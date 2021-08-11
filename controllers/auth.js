@@ -1,8 +1,8 @@
-const User = require("../models/user");
+const User = require("../models/userModel");
 const { validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const user = require("../models/user");
+const user = require("../models/userModel");
 
 exports.signup = (req, res, next) => {
   console.log("inside signup");

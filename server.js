@@ -27,7 +27,7 @@ const version = "/api/v1";
 // app.use(version + "/advertisement", advertisement);
 // app.use(version + "/category", category);
 // app.use(version + "/coupon", coupon);
-app.use(version + "/user", userRoutes);
+app.use(version + "/users", userRoutes);
 
 app.use((error, req, res, next) => {
   console.log(error);
