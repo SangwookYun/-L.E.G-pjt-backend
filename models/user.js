@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const { Schema } = mongoose;
-const { ObjectID } = require('mongodb');
+const { ObjectID } = require("mongodb");
 
-const uniqueValidator = require('mongoose-unique-validator');
+const uniqueValidator = require("mongoose-unique-validator");
 
 /**
  * @swagger
@@ -23,32 +23,34 @@ const uniqueValidator = require('mongoose-unique-validator');
  *
  */
 const dbUserShema = new Schema({
-    email: {
-        type: String,
-        required: true,
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  status: {
+    type: String,
+    default: "I am a new user!",
+  },
+  couponlimit: {
+    type: Number,
+    default: 3,
+  },
+  coupons: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "DBCoupon",
     },
-    name: {
-        type: String,
-        required: true,
-    },
-    password: {
-        type: String,
-        required: true,
-    },
-    status: {
-        type: String,
-        default : "I am a new user!"
-    }, 
-    couponlimit: {
-        type: Number,
-        default : 3
-    }, 
-    coupons: [ {
-        type:Schema.Types.ObjectId,
-        ref:'DBCoupon'
-    }]
-    // TODO: Need maybe user's credit card info
-
-})
+  ],
+  // TODO: Need maybe user's credit card info
+});
 dbUserShema.plugin(uniqueValidator);
-module.exports = mongoose.model('DBUser', dbUserShema);
+module.exports = mongoose.model("DBUser", dbUserShema);

@@ -7,7 +7,7 @@ const connDB = async () => {
       useNewUrlParser: true,
       useCreateIndex: true,
     });
-    console.log(`DB connected: ${conn}`);
+    console.log(`DB connected: ${conn.connection.host}`);
   } catch (err) {
     console.error(`${err.message}`);
     process.exit(1);
