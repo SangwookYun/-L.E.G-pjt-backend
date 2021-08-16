@@ -16,6 +16,7 @@ const bannerSchema = mongoose.Schema(
       required: true,
     },
   },
+  { collection: "dbBanner" },
   {
     timestamps: true,
   }
