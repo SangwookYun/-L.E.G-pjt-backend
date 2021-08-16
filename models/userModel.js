@@ -34,14 +34,14 @@ const userSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    status: {
-      type: String,
-      default: "I am a new user!",
-    },
-    couponlimit: {
+    userType: {
       type: Number,
-      default: 3,
+      default: 2,
     },
+    // couponlimit: {
+    //   type: Number,
+    //   default: 3,
+    // },
     coupons: [
       {
         type: mongoose.Schema.Types.ObjectId,
