@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv";
+import restaurantRoutes from "./routes/restaurantRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import connDB from "./config/db.js";
 // import restaurant from "./routes/restaurant.js";
@@ -23,11 +24,11 @@ app.use(express.json());
 
 const version = "/api/v1";
 // app.use(version + "/auth", auth);
-// app.use(version + "/restaurant", restaurant);
 // app.use(version + "/advertisement", advertisement);
 // app.use(version + "/category", category);
 // app.use(version + "/coupon", coupon);
 app.use(version + "/users", userRoutes);
+app.use(version + "/restaurant", restaurantRoutes);
 
 app.use((error, req, res, next) => {
   console.log(error);
