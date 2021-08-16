@@ -2,12 +2,11 @@ import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv";
+import restaurantRoutes from "./routes/restaurantRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import bannerRoutes from "./routes/bannerRoutes.js";
+import categoryRoutes from "./routes/categoryRoutes.js";
 import connDB from "./config/db.js";
-// import restaurant from "./routes/restaurant.js";
-// import auth from "./routes/auth.js";
-// import advertisement from "./routes/advertisement.js";
-// import category from "./routes/category.js";
 // import coupon from "./routes/coupon.js";
 
 dotenv.config();
@@ -22,12 +21,11 @@ app.use(cors());
 app.use(express.json());
 
 const version = "/api/v1";
-// app.use(version + "/auth", auth);
-// app.use(version + "/restaurant", restaurant);
-// app.use(version + "/advertisement", advertisement);
-// app.use(version + "/category", category);
-// app.use(version + "/coupon", coupon);
 app.use(version + "/users", userRoutes);
+app.use(version + "/banner", bannerRoutes);
+app.use(version + "/category", categoryRoutes);
+app.use(version + "/restaurant", restaurantRoutes);
+// app.use(version + "/coupon", coupon);
 
 app.use((error, req, res, next) => {
   console.log(error);

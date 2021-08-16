@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const advertisementModel = require('../models/advertisement')
-const restaurantModel = require('../models/restaurant')
+const advertisementModel = require('../../models/advertisement')
+const restaurantModel = require('../../models/restaurant')
 
 router.get('/:id', function(req, res, next) {
     advertisementModel.aggregate([{

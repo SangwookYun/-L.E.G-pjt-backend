@@ -1,4 +1,4 @@
-const coupon = require('../models/coupon')
+const coupon = require('../../models/coupon')
 
 exports.getCouponsByRestaurant = (req, res, next) => {
     const restaurant = req.params.restaurantId
