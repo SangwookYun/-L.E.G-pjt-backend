@@ -6,8 +6,8 @@ import CryptoJS from "crypto-js";
 
 const scanQrCode = asyncHandler(async (req, res) => {
   let data = {
-    userId: "611357459555a9266cf0d811",
-    couponId: "60d7a7e3326c816e20d1ec4b",
+    userId: "60d76260816ee225c09cc977",
+    couponId: "6120d651ccc1244bc41fbdac",
   };
   let ciphertext = CryptoJS.AES.encrypt(
     JSON.stringify(data),
