@@ -38,10 +38,6 @@ const userSchema = mongoose.Schema(
       type: Number,
       default: 2,
     },
-    // couponlimit: {
-    //   type: Number,
-    //   default: 3,
-    // },
     coupons: [
       {
         type: mongoose.Schema.Types.ObjectId,
