@@ -34,7 +34,12 @@ const couponSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    isUsed: {
+      type: Boolean,
+      default: false,
+    },
   },
+  { collection: "dbCoupons" },
   { timestamps: true }
 );
 
