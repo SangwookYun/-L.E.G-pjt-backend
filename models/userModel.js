@@ -38,10 +38,14 @@ const userSchema = mongoose.Schema(
       type: Number,
       default: 2,
     },
+    // couponlimit: {
+    //   type: Number,
+    //   default: 3,
+    // },
     coupons: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "dbCoupons",
+        ref: "DBCoupon",
       },
     ],
     // TODO: Need maybe user's credit card info
@@ -65,6 +69,6 @@ userSchema.pre("save", async function (next) {
 });
 
 userSchema.plugin(uniqueValidator);
-const User = mongoose.model("dbUsers", userSchema);
+const User = mongoose.model("DBUser", userSchema);
 
 export default User;
