@@ -67,26 +67,4 @@ const getProfile = asyncHandler(async (req, res) => {
   }
 });
 
-const updateCoupon = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.user._id);
-  const { coupon } = req.body;
-
-  if (user) {
-    user.coupons.push(coupon);
-  } else {
-    res.status(404);
-    throw new Error("Could not find this user.");
-  }
-
-  const updatedUser = await user.save();
-
-  res.json({
-    _id: updatedUser._id,
-    name: updatedUser.name,
-    email: updatedUser.email,
-    coupons: updatedUser.coupons,
-    token: genToken(updatedUser._id),
-  });
-});
-
-export { authUser, registerUser, getProfile, updateCoupon };
+export { authUser, registerUser, getProfile };

@@ -7,7 +7,7 @@ import CryptoJS from "crypto-js";
 const scanQrCode = asyncHandler(async (req, res) => {
   let data = {
     userId: "60d76260816ee225c09cc977",
-    couponId: "6120d651ccc1244bc41fbdac",
+    couponId: "60d7a7e3326c816e20d1ec4b",
   };
   let ciphertext = CryptoJS.AES.encrypt(
     JSON.stringify(data),
@@ -21,39 +21,19 @@ const scanQrCode = asyncHandler(async (req, res) => {
   const user = await User.findById(decryptedData.userId);
   const coupon = await Coupon.findById(decryptedData.couponId);
 
-  if (
-    user &&
-    coupon &&
-    coupon.isUsed === false &&
-    user.coupons.includes(coupon._id)
-  ) {
-    let updatedUserCoupons = user.coupons.filter(function (e) {
-      return e._id.toString() !== coupon._id.toString();
-    });
-    user.coupons = updatedUserCoupons;
+  if (user && coupon && !user.coupons.includes(coupon._id)) {
+    user.coupons.push(coupon);
   } else {
     res.status(404);
     throw new Error("Please check coupon information.");
   }
 
-  const updatedUser = await user.save();
-  const updatedCoupon = await Coupon.findOneAndUpdate(
-    { _id: coupon._id },
-    { $set: { isUsed: true } },
-    { useFindAndModify: false },
-    (err) => {
-      if (err) {
-        err.reason = "Failed to update coupon status.";
-        res.status(404).send(err);
-      }
-    }
-  );
+  const updatedCustomer = await user.save();
 
   res.json({
-    _id: updatedUser._id,
-    userCoupons: updatedUser.coupons,
-    redeemedCoupon: { id: updatedCoupon._id, isUsed: updatedCoupon.isUsed },
-    token: genToken(updatedUser._id),
+    _id: updatedCustomer._id,
+    redeemedCoupons: updatedCustomer.coupons,
+    token: genToken(updatedCustomer._id),
   });
 });
 
