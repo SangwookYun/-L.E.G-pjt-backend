@@ -35,6 +35,7 @@ const couponSchema = mongoose.Schema(
       required: true,
     },
   },
+  { collection: "dbCoupons" },
   { timestamps: true }
 );
 

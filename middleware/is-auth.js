@@ -27,31 +27,13 @@ const protect = expressAsyncHandler(async (req, res, next) => {
   }
 });
 
-export { protect };
+const owner = (req, res, next) => {
+  if (req.user && req.user.userType === 1) {
+    next();
+  } else {
+    res.status(401);
+    throw new Error("Not authorized as an owner");
+  }
+};
 
-// module.exports = (req, res, next) => {
-//   console.log("inside of MiddleWare");
-//   const token = req.get("Authorization").split(" ")[1];
-//   let decodedUserInfo;
-//   try {
-//     decodedUserInfo = jwt.verify(token, "somesupersecretsecret");
-//     console.log(decodedUserInfo);
-//     console.log(decodedUserInfo.exp);
-//     let iat = decodedUserInfo.iat * 1000;
-//     let exp = decodedUserInfo.exp * 1000;
-//     // let current  =new Date();
-//     // console.log(current.toLocaleString())
-//     console.log(new Date(iat));
-//     console.log(new Date(exp));
-//   } catch (err) {
-//     err.statusCode = 500;
-//     throw err;
-//   }
-//   if (!decodedUserInfo) {
-//     const error = new Error("Not authenticated");
-//     error.statusCode = 401;
-//     throw error;
-//   }
-//   req.userId = decodedUserInfo.userId;
-//   next();
-// };
+export { protect, owner };

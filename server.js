@@ -6,8 +6,8 @@ import restaurantRoutes from "./routes/restaurantRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import bannerRoutes from "./routes/bannerRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
+import couponRoutes from "./routes/couponRoutes.js";
 import connDB from "./config/db.js";
-// import coupon from "./routes/coupon.js";
 
 dotenv.config();
 
@@ -25,7 +25,7 @@ app.use(version + "/users", userRoutes);
 app.use(version + "/banner", bannerRoutes);
 app.use(version + "/category", categoryRoutes);
 app.use(version + "/restaurant", restaurantRoutes);
-// app.use(version + "/coupon", coupon);
+app.use(version + "/coupon", couponRoutes);
 
 app.use((error, req, res, next) => {
   console.log(error);
