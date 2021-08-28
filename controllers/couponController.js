@@ -37,4 +37,14 @@ const scanQrCode = asyncHandler(async (req, res) => {
   });
 });
 
-export { scanQrCode };
+const getCouponById = asyncHandler(async (req, res) => {
+  const coupon = await Coupon.findById(req.params.id);
+  if (coupon) {
+    res.json({ _id: coupon.id, qrcode: coupon.qrcode });
+  } else {
+    res.status(404);
+    throw new Error("Coupon not found");
+  }
+});
+
+export { scanQrCode, getCouponById };

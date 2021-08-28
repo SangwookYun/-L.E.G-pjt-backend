@@ -26,11 +26,7 @@ const couponSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    qrCode: {
-      type: String,
-      required: true,
-    },
-    qrCodeDetail: {
+    qrcode: {
       type: String,
       required: true,
     },
