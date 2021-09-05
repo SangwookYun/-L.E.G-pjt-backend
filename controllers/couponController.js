@@ -37,6 +37,16 @@ const scanQrCode = asyncHandler(async (req, res) => {
   });
 });
 
+const getCoupons = asyncHandler(async (req, res) => {
+  const coupons = await Coupon.find({ _id: [...req.body.coupons] });
+  if (coupons) {
+    res.json(coupons);
+  } else {
+    res.status(404);
+    throw new Error("Coupons not found");
+  }
+});
+
 const getCouponById = asyncHandler(async (req, res) => {
   const coupon = await Coupon.findById(req.params.id);
   if (coupon) {
@@ -47,4 +57,4 @@ const getCouponById = asyncHandler(async (req, res) => {
   }
 });
 
-export { scanQrCode, getCouponById };
+export { scanQrCode, getCoupons, getCouponById };

@@ -11,12 +11,10 @@ const protect = expressAsyncHandler(async (req, res, next) => {
     try {
       jwtToken = req.headers.authorization.split(" ")[1];
       const decodedUserInfo = jwt.verify(jwtToken, process.env.JWT_SECRET);
-      console.log(decodedUserInfo);
       req.user = await User.findById(decodedUserInfo.id).select("-password");
 
       next();
     } catch (error) {
-      console.log(error);
       res.status(401);
       throw new Error("Not authorized");
     }
