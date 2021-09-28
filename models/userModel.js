@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
-import bcrypt from "bcryptjs";
-import uniqueValidator from "mongoose-unique-validator";
+import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
+import uniqueValidator from 'mongoose-unique-validator';
 
 /**
  * @swagger
@@ -40,8 +40,14 @@ const userSchema = mongoose.Schema(
     },
     coupons: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "DBCoupon",
+        coupon: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'DBCoupon',
+        },
+        redeemedAt: {
+          type: Date,
+          default: Date.now,
+        },
       },
     ],
     // TODO: Need maybe user's credit card info
@@ -55,8 +61,8 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
   return await bcrypt.compare(enteredPassword, this.password);
 };
 
-userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) {
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
     next();
   }
 
@@ -65,6 +71,6 @@ userSchema.pre("save", async function (next) {
 });
 
 userSchema.plugin(uniqueValidator);
-const User = mongoose.model("DBUser", userSchema);
+const User = mongoose.model('DBUser', userSchema);
 
 export default User;
