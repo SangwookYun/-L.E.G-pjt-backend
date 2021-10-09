@@ -1,11 +1,10 @@
 import asyncHandler from 'express-async-handler';
-import genToken from '../utils/genToken.js';
 import User from '../models/userModel.js';
 import Coupon from './../models/couponModel.js';
 import CryptoJS from 'crypto-js';
 
 const scanQrCode = asyncHandler(async (req, res) => {
-  const bytes = CryptoJS.AES.decrypt(req.body, process.env.COUPON_SECRET);
+  const bytes = CryptoJS.AES.decrypt(req.body.data, process.env.COUPON_SECRET);
   const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
   const user = await User.findById(decryptedData.userId);
   const coupon = await Coupon.findById(decryptedData.couponId);
